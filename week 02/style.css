@@ -1,0 +1,41 @@
+body {
+background-color: #badda7;
+color: red;
+font-family: Aerial, Helvetica, sans-serif;
+font-size: 25px;
+font-weight: 900;
+text-align:center;
+padding: 100px;
+}
+
+main {
+background-color: CCC;
+
+}
+
+main a {
+	color: green;
+	text-decoration: none;
+}
+
+main a:hover{
+	color: blue;
+}
+
+img.india{
+width:300px;
+}
+
+
+img.indiabig{
+width: 500px;
+}
+
+
+footer {
+background-color: ddd;
+}
+
+footer h1{
+font-size: 13px;
+}
