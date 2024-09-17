@@ -1,0 +1,48 @@
+/*  <uniquifier>: Use a unique and descriptive class name
+    <weight>: Use a value from 200 to 900 */
+
+body {
+  font-family: "Reddit Sans Condensed", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: <300>; 
+  font-style: normal;
+  background-image: url("images/graph.jpg");
+/*  background-repeat: no-repeat;*/
+background-position: fixed;
+}
+
+#wrapper {
+  background-color: #CCC;
+  padding: 40px; 
+/*  padding is inside space, margin is outside space */
+  margin: 50px;
+  border: dashed 10px #000;
+}
+
+nav {
+  background-color: #fff;
+  paddding: 10px, 20px, 10px, 20px;
+/* unique padding for each side top, right, bottom, left */
+  text-align: center;
+}
+
+nav a {
+  text-decoration: none;
+  color: F0F;
+}
+footer p:hover{
+  color: blue;
+  }
+
+p span.example {
+  color: #F0F;
+}
+
+
+img.large {
+width: 200px;
+}
+img.small {
+height: 150px;
+width: auto;
+}
