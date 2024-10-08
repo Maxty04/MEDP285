@@ -1,0 +1,25 @@
+body{
+	background-color: #81D8D0;
+	font-family: Arial;
+}
+header a:hover{
+	  color: #f00;
+}
+body a:hover{
+  color: #f00;
+  }
+
+ img{
+ 	width: 400px;
+ }
+
+article a:hover{ 
+	color: #f00;
+ }
+ footer a:hover{
+  color: #f00;
+  }
+footer {
+	background-color: #;
+	font-size: 10;
+}
