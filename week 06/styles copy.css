@@ -1,0 +1,114 @@
+/* START border-box fix */
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+/* END border-box fix */
+
+body {
+  padding: 0;
+  margin: 0;
+}
+div.container{
+  width: 80%;
+  margin: 0px auto;
+/*centers the color boxes and texts to window size*/
+}
+/*
+h1, h2, h3, h4, h5, p, ul {
+  margin: 0px;
+}*/
+
+header {
+  background-color: skyblue;
+}
+
+nav{
+  background-color: cadetblue;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+header, nav, main, aside, footer{
+  padding: 10px;
+}
+
+nav ul li {
+  /* inline block will limit the box to set amount of pixels defined by width*/
+/* links are inline by default */
+  display: inline-block;
+  background-color: white;
+  padding: 6px;
+  width: 100px;
+  text-align: center ;
+  border: solid 1px black;
+}
+
+main{
+  background-color: slategray;
+  float: left;
+/* float to asign boxes to a side */
+  width: 70%;
+}
+
+main img.thumbnail  {
+  float: left;
+  margin-right: 12px;
+}
+
+main div.description {
+  clear: both;
+  float: none;
+  margin-bottom: 40px;
+}
+
+aside {
+  background-color: forestgreen;
+  float: left;
+  width: 30%;
+}
+
+footer{
+  background-color: slateblue;
+  float: none;
+/* no float or side rules */
+  clear: both;
+/* clears any rules applied to it prior */
+}
+
+div.buttonAbsolute{
+  background-color: yellow;
+  position: absolute;
+/* will lock set position */
+  top: 0px;
+  right: 20px;
+  border-radius: 25px;
+  padding: 10px;
+  z-index: 2;
+}
+div.buttonAbsolute2{
+  background-color: green;
+  position: absolute;
+/* will lock set position */
+  top: 0px;
+  right: 270px;
+  border-radius: 200px;
+  padding: 20px;
+  z-index:3;
+  opacity: 0.5;
+}
+
+div.buttonRelative {
+  background-color: yellow;
+  position: relative;
+/* makes button relative to window size */
+  left: 0px;
+  top: 0px;
+  padding: 10px;
+  z-index: 3;
+  width: 100px;
+}
