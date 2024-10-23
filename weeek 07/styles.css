@@ -1,0 +1,61 @@
+/* START border-box fix */
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+/* END border-box fix */
+
+body {
+  padding: 0;
+  margin: 0;
+    display: flex; /* set max width of .container but display as flex and center its contents */
+      justify-content: center; /* this centers the contents of the body like .container */
+}
+
+h1, h2, h3, h4, h5, h6{
+  text-transform: uppercase;
+}
+
+/* Add padding to all of the .container child elements */
+.container > * {
+  padding: 20px;
+}
+/* div.container and .container do the same thing */
+div.container{
+  color: white;
+    display: flex; /* uses flex box */
+      flex-wrap: wrap; /* wrap */
+      max-width: 1000px; /* max-width instead of just width allows it to still change in size */
+}
+
+header {
+  background: skyblue;
+  flex: 1 0 100%; /* grow on, shrink off, span width of browser */
+    order: 1; /* display order regardless of html structure */
+}
+
+main {
+background: slategray;
+flex: 1 1 500px; /* grow on, shrink on, span width of 500px */
+  order: 3;
+}
+
+nav {
+  background: cadetblue;
+  flex: 1 0 200px;
+    order: 2;
+}
+
+aside {
+  background: seagreen;
+  flex: 1 0 200px;
+    order: 4;
+}
+
+footer {
+  background: darkslateblue;
+  flex: 1 0 100%; /* grow on, shrink off, span width of browser */
+    order: 5;
+}
