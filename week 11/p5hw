@@ -1,0 +1,43 @@
+let column = 20;
+let colors = [];
+
+function setup() {
+  createCanvas(400, 400);
+
+  // random color per column
+  for (let i = 0; i < column; i++) {
+    // chooses random color
+    colors[i] = color(random(255), random(255), random(255));
+  }
+}
+
+function draw() {
+  background(255);
+
+  for (let i = 0; i < column; i++) {
+    let x = i * (width / column);
+    // check mouse pos
+    if (mouseX > x && mouseX < x + width / column) {
+      // skip column 7
+      if (i !== 6) {
+        // fills colr
+        fill(colors[i]);
+      }
+    } else {
+      // blank when not hovered
+      fill(255);
+    }
+    //draws columns
+    rect(x, 0, width / column, height);
+  }
+}
+
+// references
+// https://editor.p5js.org/lr2855/sketches/rukadoSB3
+// https://editor.p5js.org/benjamin.bergery/sketches/kHoiJQtP5
+// https://editor.p5js.org/samheckle/sketches/ttxFejYRZ
+// https://editor.p5js.org/Greenfishyy/sketches/-ZsaMruk0
+// https://editor.p5js.org/enickles/sketches/FIutsP6OY
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Loops_and_iteration#while_statement
+// https://learn-us-east-1-prod-fleet02-xythos.content.blackboardcdn.com/61aab133e7df2/196653522?X-Blackboard-S3-Bucket=learn-us-east-1-prod-fleet01-xythos&X-Blackboard-Expiration=1728961200000&X-Blackboard-Signature=yd75skfsedy12f7yBmUdrazJ%2Btv7UUnjuoUScINbQ4w%3D&X-Blackboard-Client-Id=100211&X-Blackboard-S3-Region=us-east-1&response-cache-control=private%2C%20max-age%3D21600&response-content-disposition=inline%3B%20filename%2A%3DUTF-8%27%27class3-conditionals.pdf&response-content-type=application%2Fpdf&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEIb%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJHMEUCIAgydY%2FRY0Ft7efoOaJ2MneLeu95t230%2BwJklEraTNL5AiEAkvqnCypGsgvouKZihq88vuUmvg2DGv7ptei4Nom0xScqvgUI3%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARAEGgw2MzU1Njc5MjQxODMiDFF04bClBVs%2BI5swIiqSBVaBBp61McJ1q8faEePmV7%2FYcH5%2BZCLeJKcwBGjxpsxaIvX%2B26Y90KqfWRt9p%2BES7KBsS8%2BJvpDeMI4lgPAJ%2F04%2F2YQlrmrGa8mk0vdMV3fHU27tmiy8hrhMLz4Ig5WdCN4Eyqq5YU6T10PK7FoG9JlvTCB1EZMd4Js2fsCkn4eE4jiT4Wug3qSz6mhL%2FA8826KSScW0CWWGUw%2FqtgZ1H%2F%2B5QR0MlJQdt45COH7J9bCtqU1cu%2FaUdh5cByEUfiRCpTI06luJyuj4CdpzSzv%2FtWpz1HLUrE3Eui6SN8YmkbnLTxOyQRRNiiWktlKBJ4o0SkHjBJdRuX9brHotVF7HK0Wd4otaNLP35hieD%2F%2FOCbDbRAB2P8ZskmaUoi1MkflRT9OllPsXk3upzVeZ8F5abACKw%2FOxxYgW22V6GnSfcsoU7joY%2F2P1coN%2FsIf96iXkdplXaPeBG%2FG6QgL3IkCs2%2BhfdkRaVUkQAmrCiGprSAVq4c8WDGtF%2FrENr78PLj0NCKt5LXieBQlB%2BGlw4ArnifG1r2lnpaKzzGV%2FjiHvpsHnRDlK5IuHaBt%2FHLQinLHoMXxNn6kgQqGGfUcsTPHydcoyG6zZsXJKOlT6rxwSZhu4rU%2FFxqSllEEplloAXgZtX%2FTHWjgs42dJkXR2weMK5bdUlu6Elejx9YzHQR2Nm8uUs%2F9KAJUTN7am%2BvmLBieko4FxztDRH7AT6ZC6yac75RDqYRCuluKo53LSAFYeGzGec%2B9eC6iOQgSF48O9z9EOTo1SGQUBBfud9aUadQHdT534nZz1VDxAQvgbJQY4tUiPsotFRMDvZ9B7%2FRlUxv0bjK3IwLgu4%2FqT0KsMkaGssN5WLXtI9Ctb73tZUVqIOTcas4swn6G2uAY6sQEe%2BO8hNUWaBg7iAr4Ooi71dbH67fgNOv02iYjRYxUTDUVyFbWPFPKa3rRTyRZkaBN%2BqtnshZZUwtUR3FoSYdBvoGZG0V%2B02iYezSs5T4ShrYQ3BQYdhnJKCFS1Lwm3Iva%2BEz2ZDlFkkXRss9dLk6NFVkxY1eFtZc%2BSuPeSFkhJc8X8rFIzaS%2FVHQgalw9yJxNtwKnvYQ9pElIwMtKM91asbAoSL4H5sUaUmdhlXJYQdWg%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20241014T210000Z&X-Amz-SignedHeaders=host&X-Amz-Expires=21600&X-Amz-Credential=ASIAZH6WM4PLTJZIU7D7%2F20241014%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=f2ede8ff910662239f04b1a2b9590595632b6e72e5681a2dc9ea7cb10853dcb6
+// https://learn-us-east-1-prod-fleet02-xythos.content.blackboardcdn.com/61aab133e7df2/197373151?X-Blackboard-S3-Bucket=learn-us-east-1-prod-fleet01-xythos&X-Blackboard-Expiration=1728961200000&X-Blackboard-Signature=rY5wlGcV0wOCA6s4E4xaNqn%2BHqpO50CGwcm%2ByaFQVi0%3D&X-Blackboard-Client-Id=100211&X-Blackboard-S3-Region=us-east-1&response-cache-control=private%2C%20max-age%3D21600&response-content-disposition=inline%3B%20filename%2A%3DUTF-8%27%27class5-loops.pdf&response-content-type=application%2Fpdf&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEIb%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJHMEUCIAgydY%2FRY0Ft7efoOaJ2MneLeu95t230%2BwJklEraTNL5AiEAkvqnCypGsgvouKZihq88vuUmvg2DGv7ptei4Nom0xScqvgUI3%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARAEGgw2MzU1Njc5MjQxODMiDFF04bClBVs%2BI5swIiqSBVaBBp61McJ1q8faEePmV7%2FYcH5%2BZCLeJKcwBGjxpsxaIvX%2B26Y90KqfWRt9p%2BES7KBsS8%2BJvpDeMI4lgPAJ%2F04%2F2YQlrmrGa8mk0vdMV3fHU27tmiy8hrhMLz4Ig5WdCN4Eyqq5YU6T10PK7FoG9JlvTCB1EZMd4Js2fsCkn4eE4jiT4Wug3qSz6mhL%2FA8826KSScW0CWWGUw%2FqtgZ1H%2F%2B5QR0MlJQdt45COH7J9bCtqU1cu%2FaUdh5cByEUfiRCpTI06luJyuj4CdpzSzv%2FtWpz1HLUrE3Eui6SN8YmkbnLTxOyQRRNiiWktlKBJ4o0SkHjBJdRuX9brHotVF7HK0Wd4otaNLP35hieD%2F%2FOCbDbRAB2P8ZskmaUoi1MkflRT9OllPsXk3upzVeZ8F5abACKw%2FOxxYgW22V6GnSfcsoU7joY%2F2P1coN%2FsIf96iXkdplXaPeBG%2FG6QgL3IkCs2%2BhfdkRaVUkQAmrCiGprSAVq4c8WDGtF%2FrENr78PLj0NCKt5LXieBQlB%2BGlw4ArnifG1r2lnpaKzzGV%2FjiHvpsHnRDlK5IuHaBt%2FHLQinLHoMXxNn6kgQqGGfUcsTPHydcoyG6zZsXJKOlT6rxwSZhu4rU%2FFxqSllEEplloAXgZtX%2FTHWjgs42dJkXR2weMK5bdUlu6Elejx9YzHQR2Nm8uUs%2F9KAJUTN7am%2BvmLBieko4FxztDRH7AT6ZC6yac75RDqYRCuluKo53LSAFYeGzGec%2B9eC6iOQgSF48O9z9EOTo1SGQUBBfud9aUadQHdT534nZz1VDxAQvgbJQY4tUiPsotFRMDvZ9B7%2FRlUxv0bjK3IwLgu4%2FqT0KsMkaGssN5WLXtI9Ctb73tZUVqIOTcas4swn6G2uAY6sQEe%2BO8hNUWaBg7iAr4Ooi71dbH67fgNOv02iYjRYxUTDUVyFbWPFPKa3rRTyRZkaBN%2BqtnshZZUwtUR3FoSYdBvoGZG0V%2B02iYezSs5T4ShrYQ3BQYdhnJKCFS1Lwm3Iva%2BEz2ZDlFkkXRss9dLk6NFVkxY1eFtZc%2BSuPeSFkhJc8X8rFIzaS%2FVHQgalw9yJxNtwKnvYQ9pElIwMtKM91asbAoSL4H5sUaUmdhlXJYQdWg%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20241014T210000Z&X-Amz-SignedHeaders=host&X-Amz-Expires=21600&X-Amz-Credential=ASIAZH6WM4PLTJZIU7D7%2F20241014%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=4ab3aea9664540d69dc0de35de7b68307d580e3d9b172874312e7feddebee658
