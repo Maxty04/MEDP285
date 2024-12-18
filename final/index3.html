@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MS Paint Layout</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+
+<body>
+    <header>
+        <h1>MS Paint</h1>
+    </header>
+
+    <div class="toolbar">
+        <button><a href="index.html">Home</a></button>
+        <button><a href="index2.html">Media Player</a></button>
+        <button><a href="index4.1.html">Game Boy</a></button>
+    </div>
+
+    <div class="main-container">
+        <div class="color-palette">
+            <div class="color-swatch" style="background-color: #000000;"></div>
+            <div class="color-swatch" style="background-color: #808080;"></div>
+            <div class="color-swatch" style="background-color: #C0C0C0;"></div>
+            <div class="color-swatch" style="background-color: #FFFFFF;"></div>
+            <div class="color-swatch" style="background-color: #FF0000;"></div>
+            <div class="color-swatch" style="background-color: #FFA500;"></div>
+            <div class="color-swatch" style="background-color: #FFFF00;"></div>
+            <div class="color-swatch" style="background-color: #008000;"></div>
+            <div class="color-swatch" style="background-color: #013220;"></div>
+            <div class="color-swatch" style="background-color: #0000FF;"></div>
+            <div class="color-swatch" style="background-color: #000080;"></div>
+            <div class="color-swatch" style="background-color: #ADD8E6;"></div>
+            <div class="color-swatch" style="background-color: #800080;"></div>
+            <div class="color-swatch" style="background-color: #FFC0CB;"></div>
+            <div class="color-swatch" style="background-color: #008080;"></div>
+            <div class="color-swatch" style="background-color: #000080;"></div>
+        </div>
+
+        <div class="paint-area">
+            <canvas id="paintCanvas"></canvas>
+            <p class="canvas-text">Click to Draw! </p>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy;Copyright 2024 Max T.</p>
+        <p><a href="mailto:example@email.com?subject=Website Inquiry">EMAIL ME</a></p>
+    </footer>
+
+    <script>
+        // canvas and drawing setup
+        const canvas = document.getElementById('paintCanvas');
+        const ctx = canvas.getContext('2d');
+        let drawing = false;
+
+        // canvas size
+        canvas.width = 700;
+        canvas.height = 500;
+
+        // mouse events for drawing
+        canvas.addEventListener('mousedown', startDrawing);
+        canvas.addEventListener('mousemove', draw);
+        canvas.addEventListener('mouseup', stopDrawing);
+        canvas.addEventListener('mouseout', stopDrawing);
+
+        // startdrawing
+        function startDrawing(event) {
+            drawing = true;
+            ctx.beginPath();
+            ctx.moveTo(event.offsetX, event.offsetY);
+        }
+
+        // draw on canvas
+        function draw(event) {
+            if (!drawing) return;
+            ctx.lineTo(event.offsetX, event.offsetY);
+            ctx.strokeStyle = 'black';  // brush color
+            ctx.lineWidth = 2;          // brush thickness
+            ctx.stroke();
+        }
+
+        // stop drawing
+        function stopDrawing() {
+            drawing = false;
+            ctx.closePath();
+        }
+    </script>
+</body>
+</html>
