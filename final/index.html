@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Artist Statement</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            text-align: center; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            padding: 20px;
+        }
+
+        header, footer {
+            width: 100%;
+            background-color: #1a5653;
+            padding: 20px 0;
+        }
+
+        header h1, main h2, h3, nav h2, footer h2 {
+            text-align: center;
+        }
+
+        img {
+            display: block;
+            margin: 10px auto;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0 10px;
+        }
+
+        .header-links {
+            margin-top: 10px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .header-links a {
+            text-decoration: none;
+            color: #007BFF;
+            font-weight: bold;
+            display: inline-block;
+            padding: 10px 20px;
+            border: 2px solid #007BFF;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .header-links a:hover {
+            background-color: #007BFF;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>About the Artist</h1>
+            <div class="header-links">
+                <a href="index2.html">Media Player</a>
+                <a href="index3.html">MS Paint</a>
+                <a href="index4.1.html">Game Boy</a>
+            </div>
+        </header>
+
+        <main>
+            <h2>Max T.</h2>
+            <div id="art">
+                <img src="images/mirrors.png" width="500" alt="Artwork">
+                <h3>About the Art</h3>
+                <p>The ongoing theme of this semester across multiple classes and projects has been nostalgia. Whether it be the "MS Paint" project or the inspiration behind sketches, the goal is to bring the viewers back to internet 2.0. The 3 pages that you will see on my website are all remnants of the past re-imagined in the artists form. Please be aware of how you may feel as you go through the pages and share anything you can at the link below.</p>
+            </div>
+            <div id="bio">
+                <h3>Bio</h3>
+                <p>A Korean, Brooklyn Raised, USAF vet who aspires to be one of the greats in the media world. Taking inspiration from artists such as Virgil Abloh, Kendrick Lamar, Gerald Genta, and Ralph Lauren, Max seeks to create something timeless. Something original, yet revolutionary.</p>
+            </div>
+        </main>
+
+        <footer>
+            <p>&copy;Copyright 2024 Max T.</p>
+            <p><a href="mailto:example@email.com?subject=Website Inquiry">EMAIL ME</a></p>
+        </footer>
+    </div>
+</body>
+</html>

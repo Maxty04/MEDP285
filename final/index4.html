@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gameboy</title>
+    <script src="p5.js"></script>
+    <script src="p5.sound.min.js"></script>
+    <script src="shape.js"></script>
+
+</head>
+<body>
+    <script>
+        let ground;
+        let avatar;
+        let barriers;
+
+        let isGameOver = false;
+        let hasGameBegun = false;
+        let score = 0;
+
+        let arcadeFont;
+
+        let minDistanceBetweenBarriers = 200;
+        let nextSpawnDistance;
+        let isInvincible = false;
+
+        let runningImage;
+        let jumpingImage;
+        let pipeImage;
+
+        let aButtonPressed = false;
+        let bButtonPressed = false;
+
+        let pointsound;
+        let overworldmusic;
+        let defeatmusic;
+
+        function preload() {
+            arcadeFont = loadFont("assets/arcadefont.ttf"); 
+            runningImage = loadImage("assets/run.gif"); 
+            jumpingImage = loadImage("assets/jump.gif"); 
+            pipeImage = loadImage("assets/pipe.png"); 
+            pointsound = loadSound("assets/coin.mp3");
+            overworldmusic = loadSound("assets/Overworld.mp3"); 
+            defeatmusic = loadSound("assets/Defeat.mp3");
+        }
+
+        function setup() {
+            createCanvas(600, 600);
+            textFont(arcadeFont);
+            ground = new Ground();
+            resetGame();
+            noLoop();
+        }
+
+        function resetGame() {
+            score = 0;
+            isGameOver = false;
+
+            avatar = new Avatar(ground.y);
+            barriers = [new Barrier(600, ground.y)];
+            overworldmusic.loop();
+            loop();
+        }
+
+        function draw() {
+            fill(180);
+            stroke(100);
+            rect(50, 50, 300, 500, 20);
+
+
+            fill(50, 50, 50);
+            rect(90, 90, 220, 180, 10);
+
+
+            fill(135, 206, 235);
+            noStroke();
+            rect(100, 100, 200, 160);
+
+            fill(100);
+            rect(100, 300, 20, 50);
+            rect(85, 315, 50, 20);
+
+
+            fill(aButtonPressed ? 200 : 150, 0, 0);
+            ellipse(250, 320, 40);
+            fill(bButtonPressed ? 200 : 150, 0, 0);
+            ellipse(290, 360, 40);
+
+
+            fill(255);
+            textSize(20);
+            textAlign(CENTER, CENTER);
+            text("A", 250, 320);
+            text("B", 290, 360);
+
+            
+            fill(100);
+            rect(140, 370, 40, 10, 5);
+            rect(200, 370, 40, 10, 5);
+
+  
+  for (let i = 0; i < 6; i++) {
+    rect(140, 420 + i * 10, 120, 5);
+  }
+
+  push();
+  scale(0.35); 
+  translate(280, 315); 
+
+            if (
+                barriers.length <= 0 ||
+                600 - barriers[barriers.length - 1].x >= nextSpawnDistance
+            ) {
+                barriers.push(new Barrier(600, ground.y));
+                nextSpawnDistance = random(minDistanceBetweenBarriers, 600 * 1.2);
+            }
+
+            avatar.update(ground.y);
+            ground.draw();
+
+            for (let i = barriers.length - 1; i >= 0; i--) {
+                barriers[i].update();
+                barriers[i].draw();
+
+                if (!isInvincible && barriers[i].checkIfCollision(avatar)) {
+                    isGameOver = true;
+                    overworldmusic.stop();
+                    defeatmusic.play();
+                    noLoop();
+                }
+
+                if (!barriers[i].hasScoredYet && barriers[i].getRight() < avatar.x) {
+                    barriers[i].hasScoredYet = true;
+                    score++;
+                    pointsound.play();
+                }
+
+                if (barriers[i].getRight() < 0) {
+                    barriers.splice(i, 1);
+                }
+            }
+
+            avatar.draw();
+            drawScore();
+            pop();
+        }
+
+        function drawScore() {
+            fill(0);
+            textAlign(LEFT);
+            textSize(15);
+            text("Score:" + score, 10, 20);
+
+            if (isGameOver) {
+                fill(0, 0, 0, 100);
+                rect(0, 0, 600, 400);
+
+                textAlign(CENTER);
+                textSize(35);
+                fill(255);
+                text("GAME OVER!", 600 / 2, 400 / 3);
+
+                textSize(12);
+                text("Press SPACE BAR to play again.", 600 / 2, 400 / 2);
+            } else if (!hasGameBegun) {
+                fill(0, 0, 0, 100);
+                rect(0, 0, 600, 400);
+
+                textAlign(CENTER);
+                textSize(15);
+                fill(255);
+                text("Press SPACE BAR to play!", 600 / 2, 400 / 3);
+            }
+        }
+
+        function keyPressed() {
+            if (key == " ") {
+                aButtonPressed = true;
+                if (avatar.isOnGround()) {
+                    avatar.jump();
+                }
+                if (isGameOver) {
+                    resetGame();
+                } else if (!hasGameBegun) {
+                    hasGameBegun = true;
+                    loop();
+                }
+            }
+        }
+
+        function keyReleased() {
+            if (key == " ") {
+                aButtonPressed = false;
+            }
+        }
+
+        class Ground extends Shape {
+            constructor() {
+                let yGround = 400 * 0.7;
+                let groundHeight = ceil(427 - yGround);
+                super(0, yGround, 600, groundHeight);
+                this.fillColor = color(34, 139, 34);
+            }
+
+            draw() {
+                push();
+                noStroke();
+                fill(this.fillColor);
+                rect(this.x, this.y, this.width, this.height);
+                pop();
+            }
+        }
+        
+        class Barrier extends Shape {
+            constructor(x, yGround) {
+                let barrierWidth = 40;
+                let barrierHeight = 80;
+                let y = yGround - barrierHeight + 20;
+                super(x, y, barrierWidth, barrierHeight);
+                this.speed = 6;
+                this.hasScoredYet = false;
+            }
+
+            checkIfCollision(shape) {
+                return this.overlaps(shape);
+            }
+
+            update() {
+                this.x -= this.speed;
+            }
+
+            draw() {
+                push();
+                image(pipeImage, this.x, this.y, this.width, this.height);
+                pop();
+            }
+        }
+
+        class Avatar extends Shape {
+            constructor(yGround) {
+                let avatarHeight = 20;
+                super(64, yGround - avatarHeight - 20, 10, 20);
+                this.fillColor = color(70);
+                this.gravity = 0.9;
+                this.jumpStrength = 25;
+                this.yVelocity = 0;
+                this.yGround = yGround;
+                this.isJumping = false;
+            }
+
+            jump() {
+                this.yVelocity += -this.jumpStrength;
+                this.isJumping = true;
+            }
+
+            isOnGround() {
+                return this.y == this.yGround - this.height - 20;
+            }
+
+            update() {
+                this.yVelocity += this.gravity;
+                this.yVelocity *= 0.9;
+                this.y += this.yVelocity;
+
+                if (this.y + this.height > this.yGround - 20) {
+                    this.y = this.yGround - this.height - 20;
+                    this.yVelocity = 0;
+                    this.isJumping = false;
+                }
+            }
+
+            draw() {
+                push();
+                if (this.isJumping) {
+                    image(jumpingImage, this.x, this.y, this.width * 4, this.height * 4);
+                } else {
+                    image(runningImage, this.x, this.y, this.width * 4, this.height * 4);
+                }
+                pop();
+            }
+        }
+    </script>
+</body>
+</html>
